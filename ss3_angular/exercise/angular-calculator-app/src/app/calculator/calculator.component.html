@@ -1,0 +1,12 @@
+<h1>Calculator</h1>
+<input placeholder="Operand 1" #num1 type="number" (change)="changeNum1(num1.value)">
+<span> {{operator}} </span>
+<input placeholder="Operand 2" #num2 type="number" (change)="changeNum2(num2.value)">
+<span> {{operator2}} </span> <span> {{result}} </span>
+<p>
+<button (click)="changeOperator('+')">+</button>
+<button (click)="changeOperator('-')">-</button>
+<button (click)="changeOperator('x')">x</button>
+<button (click)="changeOperator('/')">/</button>
+<button (click)="calculate('=')">=</button>
+</p>
