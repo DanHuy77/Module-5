@@ -1,3 +1,6 @@
+import {FacilityType} from './FacilityType';
+import {RentalType} from './RentalType';
+
 export interface Facility {
   id?: number;
   name?: string;
@@ -9,4 +12,6 @@ export interface Facility {
   poolArea?: string;
   floorNumber?: number;
   freeService?: string;
+  rentalType?: RentalType;
+  facilityType?: FacilityType;
 }
