@@ -9,7 +9,7 @@ export interface Facility {
   maxUser?: number;
   roomStandard?: string;
   otherDescription?: string;
-  poolArea?: string;
+  poolArea?: number;
   floorNumber?: number;
   freeService?: string;
   rentalType?: RentalType;

@@ -15,6 +15,7 @@ import { ContractListComponent } from './contract/contract-list/contract-list.co
 import { ContractAddComponent } from './contract/contract-add/contract-add.component';
 import { FacilityListComponent } from './facility/facility-list/facility-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { FacilityListComponent } from './facility/facility-list/facility-list.co
     CustomerAddComponent,
     ContractListComponent,
     ContractAddComponent,
-    FacilityListComponent
+    FacilityListComponent,
   ],
   imports: [
     BrowserModule,
