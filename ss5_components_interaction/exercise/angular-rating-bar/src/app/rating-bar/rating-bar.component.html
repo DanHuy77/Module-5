@@ -1,0 +1,8 @@
+<h3>Chấm điểm</h3>
+<br>
+<div>
+  <button *ngFor="let item of rating" (click)="changeColor(item.point)"
+          [ngStyle]="{backgroundColor: item.color}">{{item.point}}</button>
+</div>
+<br>
+<span>Điểm: {{childRating.point}}</span>

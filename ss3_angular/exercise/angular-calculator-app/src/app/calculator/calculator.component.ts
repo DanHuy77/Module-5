@@ -6,11 +6,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
-  num1?: number;
-  num2?: number;
-  operator?: string;
-  operator2?: string;
-  result?: number;
+  // @ts-ignore
+  num1: number;
+  // @ts-ignore
+  num2: number;
+  // @ts-ignore
+  operator: string;
+  // @ts-ignore
+  operator2: string;
+  // @ts-ignore
+  result: number;
 
   constructor() {
   }
