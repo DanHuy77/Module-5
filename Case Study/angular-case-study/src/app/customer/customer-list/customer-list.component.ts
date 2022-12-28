@@ -8,6 +8,8 @@ import {Customer} from '../Customer';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+  removeId?: number;
+  removeName?: string;
   customerTypes: CustomerType[] = [
     {id: 1, name: 'Diamond'},
     {id: 2, name: 'Platinum'},
@@ -45,4 +47,17 @@ export class CustomerListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  passRemoveInfo(id: number, name: string): void {
+    this.removeId = id;
+    this.removeName = name;
+  }
+
+  remove(id: string): void {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.customerTypes.length; i++) {
+      if (this.customerTypes[i].id === Number(id)) {
+        // Không xóa phần tử trong mảng được
+      }
+    }
+  }
 }
