@@ -4,11 +4,11 @@
     <input type="text" id="name" name="name" formControlName="name" required="required">
   </p>
 
-  <div *ngIf="!email.valid && (email.dirty ||email.touched)" class="alert alert-danger">
-    <div [hidden]="!email.errors.required">
+  <div *ngIf="!email?.valid && (email?.dirty ||email?.touched)" class="alert alert-danger">
+    <div [hidden]="!email?.errors.required">
       Email is required!
     </div>
-    <div [hidden]="!email.errors.email">
+    <div [hidden]="!email?.errors.email">
       Wrong format of Email!
     </div>
   </div>
@@ -18,11 +18,11 @@
     <input type="password" id="password" name="password" formControlName="password">
   </p>
 
-  <div *ngIf="!password.valid && (password.dirty ||password.touched)" class="alert alert-danger">
-    <div [hidden]="!password.errors.required">
+  <div *ngIf="!password?.valid && (password?.dirty ||password?.touched)" class="alert alert-danger">
+    <div [hidden]="!password?.errors.required">
       Password is required!
     </div>
-    <div [hidden]="!password.errors.minlength">
+    <div [hidden]="!password?.errors.minlength">
       Password's length must be above 6 digits!
     </div>
   </div>
@@ -32,9 +32,10 @@
     <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
   </p>
 
-  <div *ngIf="confirmPassword.touched && confirmPassword.invalid" class="alert alert-danger">
-    <div *ngIf="confirmPassword.errors.required">Password Confirmation is Required!</div>
+  <div *ngIf="confirmPassword?.touched && confirmPassword?.invalid" class="alert alert-danger">
+    <div *ngIf="confirmPassword?.errors.required">Password Confirmation is Required!</div>
   </div>
+  <div class="alert alert-danger" *ngIf="registerForm.hasError('mismatchedPassword')">Mismatched Password!</div>
 
   <p>
     <label for="country">Country </label>
@@ -45,8 +46,8 @@
     </select>
   </p>
 
-  <div *ngIf="!country.valid && (country.dirty ||country.touched)" class="alert alert-danger">
-    <div [hidden]="!country.errors.required">
+  <div *ngIf="!country?.valid && (country?.dirty ||country?.touched)" class="alert alert-danger">
+    <div [hidden]="!country?.errors.required">
       Country is Required!
     </div>
   </div>
@@ -56,11 +57,11 @@
     <input type="number" id="age" name="age" formControlName="age">
   </p>
 
-  <div *ngIf="!age.valid && (age.dirty ||age.touched)" class="alert alert-danger">
-    <div [hidden]="!age.errors.required">
+  <div *ngIf="!age?.valid && (age?.dirty ||age?.touched)" class="alert alert-danger">
+    <div [hidden]="!age?.errors.required">
       Age is Required!
     </div>
-    <div [hidden]="!age.errors.min">
+    <div [hidden]="!age?.errors.min">
       Age must be above 18!
     </div>
   </div>
@@ -71,8 +72,8 @@
     <input type="radio" value="female" id="gender" name="gender" formControlName="gender"> Nữ
   </p>
 
-  <div *ngIf="!gender.valid && (gender.dirty ||gender.touched)" class="alert alert-danger">
-    <div [hidden]="!gender.errors.required">
+  <div *ngIf="!gender?.valid && (gender?.dirty ||gender?.touched)" class="alert alert-danger">
+    <div [hidden]="!gender?.errors.required">
       Gender is Required!
     </div>
   </div>
@@ -82,11 +83,11 @@
     <input type="text" id="phoneNumber" name="phoneNumber" formControlName="phoneNumber">
   </p>
 
-  <div *ngIf="!phoneNumber.valid && (phoneNumber.dirty ||phoneNumber.touched)" class="alert alert-danger">
-    <div [hidden]="!phoneNumber.errors.required">
+  <div *ngIf="!phoneNumber?.valid && (phoneNumber?.dirty ||phoneNumber?.touched)" class="alert alert-danger">
+    <div [hidden]="!phoneNumber?.errors.required">
       Phone Number is Required
     </div>
-    <div [hidden]="!phoneNumber.errors.pattern">
+    <div [hidden]="!phoneNumber?.errors.pattern">
       Mismatching Phone Number Format
     </div>
   </div>

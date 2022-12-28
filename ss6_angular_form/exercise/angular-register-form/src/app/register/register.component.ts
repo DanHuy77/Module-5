@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     age: new FormControl('', [Validators.min(18)]),
     gender: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^[+][8][4][0-9]{9,10}$')])
-  });
+  }, [this.validateConfirmPass]);
 
   // @ts-ignore
   countryList: Country[] = [{id: 1, name: 'VietNam'}, {id: 2, name: 'USA'}, {id: 3, name: 'China'}, {id: 4, name: 'Australia'}, {
@@ -35,8 +35,17 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  validateConfirmPass(registerForm: any) {
+    if (registerForm.controls.password.value != registerForm.controls.confirmPassword.value) {
+      return {'mismatchedPassword': true};
+    }
+    return null;
+  }
+
   onSubmit() {
-    this.infoDatabase.push(this.registerForm.getRawValue());
+    if (this.registerForm.valid) {
+      this.infoDatabase.push(this.registerForm.getRawValue());
+    }
   }
 
   get email() {

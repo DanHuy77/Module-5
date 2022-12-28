@@ -14,6 +14,7 @@ import { CustomerAddComponent } from './customer/customer-add/customer-add.compo
 import { ContractListComponent } from './contract/contract-list/contract-list.component';
 import { ContractAddComponent } from './contract/contract-add/contract-add.component';
 import { FacilityListComponent } from './facility/facility-list/facility-list.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -31,10 +32,11 @@ import { FacilityListComponent } from './facility/facility-list/facility-list.co
     ContractAddComponent,
     FacilityListComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
