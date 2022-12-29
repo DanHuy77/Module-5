@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../model/product';
-import {Word} from '../../dictionary/word';
+
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +69,7 @@ export class ProductService {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].id === id) {
         this.products.splice(i, 1);
+        break;
       }
     }
   }
