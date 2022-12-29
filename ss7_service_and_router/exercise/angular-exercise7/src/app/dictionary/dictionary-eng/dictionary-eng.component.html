@@ -1,0 +1,14 @@
+<h1>Dictionary</h1>
+<hr>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Words</th>
+    <th>Details</th>
+  </tr>
+  <tr *ngFor="let item of words">
+    <td>{{item.id}}</td>
+    <td>{{item.name}}</td>
+    <td><button type="button" [routerLink]="['/translate', item.id, item.name]">for Details</button></td>
+  </tr>
+</table>

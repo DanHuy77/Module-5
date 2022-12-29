@@ -1,0 +1,29 @@
+<h1>Danh sách sản phẩm</h1>
+<table class="table table-success">
+  <thead>
+  <tr>
+    <th scope="col">STT</th>
+    <th scope="col">Tên</th>
+    <th scope="col">Giá</th>
+    <th scope="col">Mô tả</th>
+    <th scope="col">Chỉnh sửa</th>
+    <th scope="col">Xóa</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.description}}</td>
+    <td>
+      <button class="btn btn-primary" type="button" [routerLink]="['/product/edit', product.id]">Chỉnh sửa</button>
+    </td>
+    <td>
+      <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="temp = product">Delete
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<app-product-remove [product]="temp"></app-product-remove>
