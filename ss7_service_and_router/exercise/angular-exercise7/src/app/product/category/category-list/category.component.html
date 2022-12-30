@@ -1,0 +1,14 @@
+<table class="table table-success">
+  <thead>
+  <th>STT</th>
+  <th>Loại máy</th>
+  <th>Chỉnh sửa</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of categories">
+    <td>{{item.id}}</td>
+    <td>{{item.name}}</td>
+    <button class="btn btn-success" type="button" [routerLink]="['/product/category-edit', item.id]">Chỉnh sửa</button>
+  </tr>
+  </tbody>
+</table>

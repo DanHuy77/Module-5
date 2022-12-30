@@ -6,6 +6,7 @@
     <th scope="col">Tên</th>
     <th scope="col">Giá</th>
     <th scope="col">Mô tả</th>
+    <th scope="col">Loại máy</th>
     <th scope="col">Chỉnh sửa</th>
     <th scope="col">Xóa</th>
   </tr>
@@ -16,6 +17,7 @@
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>
     <td>{{product.description}}</td>
+    <td>{{product.category?.name}}</td>
     <td>
       <button class="btn btn-primary" type="button" [routerLink]="['/product/edit', product.id]">Chỉnh sửa</button>
     </td>

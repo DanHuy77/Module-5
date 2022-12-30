@@ -1,0 +1,11 @@
+<form [formGroup]="categoryForm" (ngSubmit)="submit()">
+  <label>Id</label>
+  <br>
+  <input formControlName="id" type="number">
+  <br>
+  <label>Tên</label>
+  <br>
+  <input formControlName="name" type="text">
+  <br>
+  <button class="btn btn-outline-dark" type="submit">Xác nhận</button>
+</form>

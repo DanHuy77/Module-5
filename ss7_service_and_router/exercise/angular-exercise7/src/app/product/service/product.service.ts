@@ -1,78 +1,37 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../model/product';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  products: Product[] = [{
-    id: 1,
-    name: 'IPhone 12',
-    price: 2400000,
-    description: 'New'
-  }, {
-    id: 2,
-    name: 'IPhone 11',
-    price: 1560000,
-    description: 'Like new'
-  }, {
-    id: 3,
-    name: 'IPhone X',
-    price: 968000,
-    description: '97%'
-  }, {
-    id: 4,
-    name: 'IPhone 8',
-    price: 7540000,
-    description: '98%'
-  }, {
-    id: 5,
-    name: 'IPhone 11 Pro',
-    price: 1895000,
-    description: 'Like new'
-  }];
+  PRODUCT_URL = 'http://localhost:3000/products';
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  getAll(): Product[] {
-    return this.products;
+  getAll(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.PRODUCT_URL);
   }
 
-  saveProduct(product: Product): void {
-    this.products.push(product);
+  saveProduct(product: Product): Observable<Product> {
+    return this.httpClient.post(this.PRODUCT_URL, product);
   }
 
-  findProductById(id: number): Product | null {
-    const temp: Product[] = this.products.filter(product => product.id === id);
-    if (temp.length === 0) {
-      return null;
-    } else {
-      return temp[0];
-    }
+  findProductById(id: number): Observable<Product> {
+    return this.httpClient.get<Product>(this.PRODUCT_URL + '/' + id);
   }
 
-  editProduct(product: Product): void {
-    console.log(product);
-    console.log(product.id);
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === product.id) {
-        // this.products.splice(i, 1);
-        // this.products.push(product);
-        this.products[i] = product;
-      }
-    }
+  editProduct(product: Product): Observable<Product> {
+    return this.httpClient.patch(this.PRODUCT_URL + '/' + product.id, product);
   }
 
-  removeProductById(id: number): void {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
-        this.products.splice(i, 1);
-        break;
-      }
-    }
-  }
 
+  removeProduct(id: number): Observable<Product> {
+    return this.httpClient.delete(this.PRODUCT_URL + '/' + id);
+  }
 }
 

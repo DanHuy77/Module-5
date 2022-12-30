@@ -18,7 +18,6 @@ export class ProductRemoveComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // @ts-ignore
     // this.product = this.productService.findProductById(this.product.id);
   }
 
@@ -26,7 +25,10 @@ export class ProductRemoveComponent implements OnInit, OnChanges {
   }
 
   removeProduct(): void {
-    this.productService.removeProductById(Number(this.product?.id));
+    // @ts-ignore
+    this.productService.removeProduct(Number(this.product.id)).subscribe(data => {
+      this.productService.getAll().subscribe();
+    });
   }
 }
 
