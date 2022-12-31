@@ -2,7 +2,7 @@
   <div class="col-6">
 
     <div class="my-5"><h1>Thêm mới khách hàng</h1></div>
-    <form [formGroup]="addCustomerForm" class="my-5" novalidate>
+    <form [formGroup]="addCustomerForm" (ngSubmit)="addNewCustomer()" class="my-5" novalidate>
       <!-- <input hidden type="text" th:field="*{id}"> -->
       <!--            ----------Form nhập tên------------>
       <div class="form-group">
@@ -17,9 +17,10 @@
       <div class="form-group">
         <label>Loại khách</label>
         <span style="color: red"
-              *ngIf="customerType?.dirty && addCustomerForm.controls.customerType.hasError('required')"> phải được chọn</span>
-        <select class="form-select hideDefaultSelect" formControlName="customerType">
+              *ngIf="customerTypeForm?.dirty && addCustomerForm.controls.customerType.hasError('required')"> phải được chọn</span>
+        <select class="form-select hideDefaultSelect" formControlName="customerTypeForm">
           <option class="defaultSelect">Chọn loại khách</option>
+          <option *ngFor="let item of customerType" [ngValue]="item">{{item.name}}</option>
         </select>
       </div>
 

@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CustomerServiceService} from '../service/customer-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Customer} from '../Customer';
+import {CustomerType} from '../CustomerType';
 
 @Component({
   selector: 'app-customer-edit',
@@ -7,9 +11,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./customer-edit.component.css']
 })
 export class CustomerEditComponent implements OnInit {
+  customer?: Customer;
+  customerType?: CustomerType[] = [];
   editCustomerForm = new FormGroup({
     name: new FormControl('', [Validators.minLength(5), Validators.maxLength(50), Validators.required]),
-    customerType: new FormControl('', [Validators.required]),
+    customerTypeForm: new FormControl('', [Validators.required]),
     birthday: new FormControl('', [Validators.required]),
     gender: new FormControl('', [Validators.required]),
     idNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
@@ -18,17 +24,34 @@ export class CustomerEditComponent implements OnInit {
     address: new FormControl('', [Validators.required, Validators.maxLength(100)])
   });
 
-  constructor() {
+  constructor(private customerServiceService: CustomerServiceService, private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(data => {
+      const id = data.get('id');
+      if (id != null) {
+        this.customerServiceService.findCustomerById(Number(id)).subscribe(data1 => {
+          this.customer = data1;
+          this.editCustomerForm.patchValue(this.customer);
+        });
+      }
+    });
+    this.customerServiceService.getAllCustomerType().subscribe(data => {
+      this.customerType = data;
+    });
   }
 
   ngOnInit(): void {
+  }
+
+  compareType(item1: CustomerType, item2: CustomerType): boolean {
+    return item1 && item2 ? item1.id === item2.id : item1 === item2;
   }
   get name() {
     return this.editCustomerForm.get('name');
   }
 
-  get customerType() {
-    return this.editCustomerForm.get('customerType');
+  get customerTypeForm() {
+    return this.editCustomerForm.get('customerTypeForm');
   }
 
   get birthday() {
@@ -53,5 +76,11 @@ export class CustomerEditComponent implements OnInit {
 
   get address() {
     return this.editCustomerForm.get('address');
+  }
+
+  editCustomer(): void {
+    this.customerServiceService.editCustomer(this.editCustomerForm.value).subscribe(data => {
+      this.router.navigateByUrl('/customer/list');
+    });
   }
 }

@@ -22,10 +22,30 @@
       <button class="btn btn-primary" type="button" [routerLink]="['/product/edit', product.id]">Chỉnh sửa</button>
     </td>
     <td>
-      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="temp = product">Delete
+      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              (click)="passRemoveInfo(product.id, product.name)">Delete
       </button>
     </td>
   </tr>
   </tbody>
 </table>
-<app-product-remove [product]="temp"></app-product-remove>
+<!--<app-product-remove [product]="temp"></app-product-remove>-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc muốn xóa sản phẩm {{temp?.name}} không?
+        <input #id hidden value="{{temp?.id}}"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="removeProduct(id.value)" data-bs-dismiss="modal">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,10 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
   constructor(private productService: ProductService, private router: Router) {
+
+  }
+
+  ngOnInit(): void {
     this.productService.getAll().subscribe(data => {
       console.log(data);
       // @ts-ignore
@@ -22,13 +26,22 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // this.getAll();
-  }
-
 
   // showEditForm(): void {
   //   this.router.navigateByUrl('product/edit/:id');
   // }
+
+  passRemoveInfo(id: number, name: string): void {
+    // @ts-ignore
+    this.temp.id = id;
+    // @ts-ignore
+    this.temp.name = name;
+  }
+
+  removeProduct(value: string): void {
+    this.productService.removeProduct(Number(value)).subscribe(data => {
+      this.ngOnInit();
+    });
+  }
 
 }

@@ -35,7 +35,7 @@
     <th scope="col">Email</th>
     <th scope="col">Địa chỉ</th>
     <th scope="col">Loại khách</th>
-    <th scope="col" colspan="3"><a class="btn btn-primary">Thêm mới khách hàng</a>
+    <th scope="col" colspan="3"><a class="btn btn-primary" routerLink="/customer/add">Thêm mới khách hàng</a>
     </th>
 
   </tr>
@@ -53,7 +53,7 @@
     <td>{{item.email}}</td>
     <td>{{item.address}}</td>
     <td>{{item.customerType?.name}}</td>
-    <td><a class="btn btn-success">Cập nhật</a></td>
+    <td><a class="btn btn-success"[routerLink]="['/customer/edit', item.id]">Cập nhật</a></td>
     <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#remove"
            (click)="passRemoveInfo(item.id, item.name)">Xóa</a>
     </td>

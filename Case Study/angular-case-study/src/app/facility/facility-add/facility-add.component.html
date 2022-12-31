@@ -1,1 +1,100 @@
-<p>facility-add works!</p>
+<div class="my-5"><h1>Build new Facility</h1></div>
+<form class="my-5" [formGroup]="addFacilityForm" (ngSubmit)="addNewFacility()">
+
+
+  <!--            ----------Form chọn kiểu cơ sở------------>
+  <div class="form-group">
+    <label>Facility Type</label>
+    <select id="facilityType" class="form-select hideDefaultSelect">
+      <option class="defaultSelect">Choose Facility Type</option>
+      <option *ngFor="let item of facilityType" [ngValue]="item">{{item.name}}</option>
+    </select>
+    <br>
+  </div>
+
+  <!--            ----------Form nhập tên------------>
+  <div class="form-group">
+    <label>Facility's Name</label>
+    <input type="text" class="form-control">
+
+  </div>
+
+
+  <!--            ----------Form nhập diện tích------------>
+  <div class="form-group">
+    <label>Area</label>
+    <input type="text" class="form-control">
+
+  </div>
+
+
+  <!--            ----------Form nhập chi phí thuê------------>
+  <div class="form-group">
+    <label>Rental Cost</label>
+    <input type="text" class="form-control">
+  </div>
+
+
+  <!--            ----------Form nhập số người tối đa------------>
+  <div class="form-group">
+    <label>Maximum Users</label>
+    <input type="number" min="0" class="form-control">
+  </div>
+
+
+  <!--            ----------Form chọn tiêu chuẩn phòng------------>
+  <div class="form-group">
+    <label>Room Standard</label>
+    <select class="form-select hideDefaultSelect">
+      <option class="defaultSelect">Choose Room Standard</option>
+      <option value="Vip">Vip</option>
+      <option value="Normal">Normal</option>
+    </select>
+  </div>
+
+  <!--            ----------Form nhập mô tả tiện nghi khác------------>
+  <div class="form-group">
+    <label>Other Description</label>
+    <input type="text" class="form-control">
+  </div>
+
+  <!--            ----------Form nhập số diện tích hồ bơi------------>
+  <div id="poolArea" class="form-group">
+    <label>Pool Area</label>
+    <input type="text" class="form-control">
+  </div>
+
+  <!--            ----------Form nhập số tầng------------>
+  <div id="floorNumber" class="form-group">
+    <label>Floor Number</label>
+    <input type="number" min="0" class="form-control">
+  </div>
+
+  <!--            ----------Form nhập dịch vụ miễn phí đi kèm------------>
+  <div id="freeService" class="form-group">
+    <label>Free Service</label>
+    <input type="text" class="form-control">
+  </div>
+
+  <!--            ----------Form chọn kiểu thuê------------>
+  <div class="form-group">
+    <label>Rental Type</label>
+    <select class="form-select hideDefaultSelect">
+      <option class="defaultSelect">Choose Rental Type</option>
+      <option *ngFor="let item of rentalType" [ngValue]="item">{{item.name}}</option>
+    </select>
+  </div>
+
+  <!--            ----------Nút tuỳ chọn------------>
+  <div class="form-group d-flex align-items-center justify-content-center" style="margin-top: 25px; margin-left: 55px;">
+    <a class="form-control btn btn-outline-secondary" href="/facility"
+       style="text-decoration: none; color: black; width: 30%">Cancel</a>
+    <input style="width: 30%" type="submit" class="form-control btn btn-outline-success mx-5"
+           id="formInput11" value="Submit">
+  </div>
+  <div class="form-group d-flex align-items-center justify-content-center" style="margin-top: 25px">
+    <a type="button" class="form-control btn btn-success"
+       href="/" style="text-decoration: none; color: white; width:
+                   30%">Home</a>
+  </div>
+</form>

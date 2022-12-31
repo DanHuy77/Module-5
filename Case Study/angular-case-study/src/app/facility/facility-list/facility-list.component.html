@@ -1,4 +1,5 @@
 <h1 style="text-align: center">Danh sách cơ sở dịch vụ</h1>
+<a class="btn btn-primary" routerLink="/facility/add" style="float: right">Add new Facility</a>
 <div class="album py-5">
   <div class="d-flex justify-content-evenly">
     <div class="card" style="width: 20rem" *ngFor="let item of facilities">
@@ -10,7 +11,7 @@
           {{item.otherDescription}} <br>
 <!--        {{item.facilityType?.name}} <br>-->
 <!--        {{item.rentalType?.name}}</p>-->
-        <a href="#!" class="btn btn-success">Cập nhật</a>
+        <a href="#!" class="btn btn-success" [routerLink]="['/facility/edit', item.id]">Cập nhật</a>
         <a href="#!" class="btn btn-warning">Chi tiết</a>
         <a href="#!" class="btn btn-danger">Xóa</a>
       </div>

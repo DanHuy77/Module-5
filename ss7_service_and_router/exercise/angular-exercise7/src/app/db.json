@@ -39,16 +39,6 @@
         "id": 2,
         "name": "Xách tay"
       }
-    },
-    {
-      "id": 5,
-      "name": "IPhone 11 Pro",
-      "price": 1895000,
-      "description": "Like new",
-      "category": {
-        "id": 2,
-        "name": "Xách tay"
-      }
     }
   ],
   "categories": [

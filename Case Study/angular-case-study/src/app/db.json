@@ -1,0 +1,121 @@
+{
+  "customer": [
+    {
+      "id": 1,
+      "name": "Nguyễn Thị Hào",
+      "birthday": "1970-11-07",
+      "idCard": "643431213",
+      "phoneNumber": "0945423362",
+      "gender": false,
+      "email": "thihao07@gmail.com",
+      "address": "23 Nguyễn Hoàng, Đà Nẵng",
+      "customerType": {
+        "id": 5,
+        "name": "Member"
+      }
+    }
+  ],
+  "facility": [
+    {
+      "id": 1,
+      "name": "Villa Beach Front",
+      "area": 2500,
+      "cost": 1000000,
+      "maxPeople": 10,
+      "standardRoom": "vip",
+      "descriptionOtherConvenience": "Có hồ bơi",
+      "poolArea": 500,
+      "numberOfFloors": 4,
+      "freeService": "",
+      "facilityType": {
+        "id": 1,
+        "name": "villa"
+      },
+      "rentalType": {
+        "id": 3,
+        "name": "date"
+      }
+    }
+  ],
+  "contract": [
+    {
+      "id": 1,
+      "startDay": "2020-12-08",
+      "endDay": "2020-12-08",
+      "deposit": 0,
+      "customer": {
+        "id": 1,
+        "name": "Nguyễn Thị Hào"
+      },
+      "facility": {
+        "id": 3,
+        "name": "Room Twin 01"
+      }
+    }
+  ],
+  "position": [
+    {
+      "id": 1,
+      "name": "Quản Lý"
+    },
+    {
+      "id": 2,
+      "name": "Nhân viên"
+    }
+  ],
+  "customerType":[
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinium"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+  "rentalType": [
+    {
+      "id"  : 1,
+      "name": "year"
+    },
+    {
+      "id"  : 2,
+      "name": "month"
+    },
+    {
+      "id"  : 3,
+      "name": "day"
+    },
+    {
+      "id"  : 4,
+      "name": "hour"
+    }
+  ],
+  "facilityType": [
+    {
+      "id": 1,
+      "name": "Villa"
+    },
+    {
+      "id": 2,
+      "name": "House"
+    },
+    {
+      "id": 3,
+      "name": "Room"
+    }
+  ]
+
+}

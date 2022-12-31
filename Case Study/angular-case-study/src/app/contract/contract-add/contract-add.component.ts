@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe, formatDate} from '@angular/common';
 import {Local} from 'protractor/built/driverProviders';
+import {ContractService} from '../service/contract.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contract-add',
@@ -17,7 +19,7 @@ export class ContractAddComponent implements OnInit {
     facility: new FormControl('')
   }, [Validators.required, this.endDayValidate]);
 
-  constructor() {
+  constructor(private contractService: ContractService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -52,5 +54,11 @@ export class ContractAddComponent implements OnInit {
 
   get facility() {
     return this.addContractForm.get('facility');
+  }
+
+  addNewContract(): void {
+    this.contractService.addContract(this.addContractForm.value).subscribe(data => {
+      this.router.navigateByUrl('contract/list');
+    });
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerType} from '../CustomerType';
 import {Customer} from '../Customer';
+import {CustomerServiceService} from '../service/customer-service.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -10,41 +11,20 @@ import {Customer} from '../Customer';
 export class CustomerListComponent implements OnInit {
   removeId?: number;
   removeName?: string;
-  customerTypes: CustomerType[] = [
-    {id: 1, name: 'Diamond'},
-    {id: 2, name: 'Platinum'},
-    {id: 3, name: 'Gold'},
-    {id: 4, name: 'Silver'},
-    {id: 5, name: 'Member'}];
-  customers: Customer[] = [
-    {
-      id: 1,
-      name: 'Nguyễn Thị Hào',
-      birthday: '1970-11-07',
-      gender: false,
-      idNumber: '643431213',
-      phoneNumber: '0945423362',
-      email: 'thihao07@gmail.com',
-      address: '23 Nguyễn Hoàng, Đà Nẵng',
-      customerType: this.customerTypes[4]
-    },
-    {
-      id: 2,
-      name: 'Phạm Xuân Diệu',
-      birthday: '1992-08-08',
-      gender: true,
-      idNumber: '865342123',
-      phoneNumber: '0954333333',
-      email: 'xuandieu92@gmail.com',
-      address: 'K77/22 Thái Phiên, Quảng Trị',
-      customerType: this.customerTypes[2]
-    },
-  ];
+  customerTypes: CustomerType[] = [];
+  customers: Customer[] = [];
 
-  constructor() {
+  constructor(private customerServiceService: CustomerServiceService) {
   }
 
   ngOnInit(): void {
+    this.customerServiceService.getAllCustomer().subscribe(data => {
+      console.log(data);
+      // @ts-ignore
+      this.customers = data;
+    }, error => {
+    }, () => {
+    });
   }
 
   passRemoveInfo(id: number, name: string): void {
@@ -53,11 +33,8 @@ export class CustomerListComponent implements OnInit {
   }
 
   remove(id: string): void {
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.customerTypes.length; i++) {
-      if (this.customerTypes[i].id === Number(id)) {
-        // Không xóa phần tử trong mảng được
-      }
-    }
+    this.customerServiceService.removeCustomer(Number(id)).subscribe(data => {
+      this.ngOnInit();
+    });
   }
 }
