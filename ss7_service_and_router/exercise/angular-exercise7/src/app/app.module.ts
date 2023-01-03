@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { CategoryComponent } from './product/category/category-list/category.component';
 import { CategoryAddComponent } from './product/category/category-add/category-add.component';
 import { CategoryEditComponent } from './product/category/category-edit/category-edit.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CategoryEditComponent } from './product/category/category-edit/category
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

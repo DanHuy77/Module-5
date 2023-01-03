@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
   //   this.router.navigateByUrl('product/edit/:id');
   // }
 
-  passRemoveInfo(id: number, name: string): void {
+  passRemoveInfo(id: number | undefined, name: string): void {
     // @ts-ignore
     this.temp.id = id;
     // @ts-ignore
