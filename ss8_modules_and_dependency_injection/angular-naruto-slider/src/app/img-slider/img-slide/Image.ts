@@ -1,4 +1,4 @@
-export interface ImgSlider {
+export interface Image {
   id?: number;
   src?: string;
 }
