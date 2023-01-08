@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import spring.final_exam.product_package.model.Package;
@@ -32,10 +33,14 @@ public class PackageRestController {
 
             @RequestParam(defaultValue = "2100-01-01") String startDate,
 
-            @RequestParam(defaultValue = "1900-01-01") String endDate, Pageable pageable) {
-        Pageable pageable1 = Pageable.ofSize(5);
+            @RequestParam(defaultValue = "1900-01-01") String endDate,
 
-        Page<Package> packagePage = packageService.getPackageListByAll(productName, importDate, startDate, endDate, pageable);
+            @RequestParam(defaultValue = "0") int page,
+
+            @RequestParam() int size) {
+        Pageable pageable = Pageable.ofSize(size);
+        Page<Package> packagePage = packageService.getPackageListByAll(productName, importDate, startDate, endDate, pageable.withPage(page));
+        packagePage.getTotalPages();
         if (packagePage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -52,7 +57,10 @@ public class PackageRestController {
     }
 
     @PostMapping("")
-    public ResponseEntity<HttpStatus> addNewPackage(@RequestBody Package aPackage) {
+    public ResponseEntity<HttpStatus> addNewPackage(@Validated @RequestBody Package aPackage, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
         aPackage.setProduct(productService.findById(aPackage.getProduct().getId()));
         packageService.save(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -69,7 +77,10 @@ public class PackageRestController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> editPackageInformation(@PathVariable("id") Integer id, @RequestBody Package aPackage) {
+    public ResponseEntity<HttpStatus> editPackageInformation(@Validated @PathVariable("id") Integer id, @RequestBody Package aPackage, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
         Package aPackage1 = packageService.findById(id);
         System.out.println(aPackage.toString());
         if (aPackage1 == null) {

@@ -11,6 +11,7 @@ import { PackageListComponent } from './package-list/package-list.component';
 import { PackageAddComponent } from './package-add/package-add.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { PackageEditComponent } from './package-edit/package-edit.component';
+import { BackgroundComponent } from './background/background.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PackageEditComponent } from './package-edit/package-edit.component';
     FooterComponent,
     PackageListComponent,
     PackageAddComponent,
-    PackageEditComponent
+    PackageEditComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,

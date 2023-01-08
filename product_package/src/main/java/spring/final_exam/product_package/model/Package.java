@@ -1,15 +1,19 @@
 package spring.final_exam.product_package.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Pattern(regexp = "[L][H][-][0-9]{4}", message = "Mã lô hàng sai định dạng")
     private String packageCode;
     @OneToOne
     private Product product;
+    @Min(value = 1, message = "Số lượng phải là số nguyên dương và lớn hơn không")
     private Integer quantity;
     private String importDate;
     private String producedDate;
@@ -73,6 +77,7 @@ public class Package {
     public void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
+
 }
 //    product?: Product;
 //    quantity?: number;

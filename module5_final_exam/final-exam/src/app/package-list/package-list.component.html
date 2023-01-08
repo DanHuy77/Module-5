@@ -37,13 +37,13 @@
     <th scope="col">Ngày sản xuất</th>
     <th scope="col">Ngày hết hạn</th>
     <th scope="col" colspan="3">
-      <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add" routerLink="/add">Nhập hàng</a>
+      <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add" routerLink="/index">Nhập hàng</a>
     </th>
 
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let pack of packs| paginate: { itemsPerPage: 5, currentPage: p}; index as i ">
+  <tr *ngFor="let pack of packs index as i ">
     <td>{{i + 1}}</td>
     <input hidden #imports [value]="pack?.importDate">
     <input hidden #name [value]="pack?.product?.name">
@@ -63,7 +63,12 @@
   </tr>
   </tbody>
 </table>
-<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>
+<div style="text-align: right">
+  <a class="btn btn-primary" *ngIf="page > 0" (click)="previousPage()">Trang trước</a>
+  <span> {{page+1}}/{{totalPage}} </span>
+  <a class="btn btn-primary" *ngIf="page+1 < totalPage" (click)="nextPage()">Trang
+    sau</a>
+</div>
 
 <div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

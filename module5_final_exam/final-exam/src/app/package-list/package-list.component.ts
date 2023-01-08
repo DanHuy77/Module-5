@@ -15,20 +15,26 @@ export class PackageListComponent implements OnInit {
   removeId?: string;
   removeName?: string;
   removeImportDate?: string;
+  page = 0;
+  size = 5;
+  totalPage = 0;
 
   constructor(private appService: AppService) {
-    this.getAllPackage();
+
   }
 
   ngOnInit(): void {
+    this.getAllPackage();
     this.appService.getAllProduct().subscribe(data => {
       this.product = data;
     });
   }
 
   getAllPackage(): void {
-    this.appService.searchByProductNameAndExpireDateAndImportDate("", "", "", "").subscribe(data => {
+    this.appService.searchByProductNameAndExpireDateAndImportDate("", "", "", "", this.page, this.size).subscribe(data => {
       this.packs = data.content;
+      this.totalPage = data.totalPages;
+      console.log(this.totalPage);
       console.log(data)
     });
   }
@@ -47,8 +53,26 @@ export class PackageListComponent implements OnInit {
   }
 
   search(productName: string, importDate: string, producedDate: string, expireDate: string) {
-    this.appService.searchByProductNameAndExpireDateAndImportDate(productName, importDate, producedDate, expireDate).subscribe(data => {
+    this.appService.searchByProductNameAndExpireDateAndImportDate(productName, importDate, producedDate, expireDate, this.page, this.size).subscribe(data => {
       this.packs = data.content;
     });
+  }
+
+  previousPage() {
+    if (this.page == 0) {
+
+    } else {
+      this.page = this.page - 1;
+      this.ngOnInit();
+    }
+  }
+
+  nextPage() {
+    if (this.page == this.totalPage - 1) {
+
+    } else {
+      this.page = this.page + 1;
+      this.ngOnInit();
+    }
   }
 }

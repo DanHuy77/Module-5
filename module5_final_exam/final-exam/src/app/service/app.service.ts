@@ -38,11 +38,11 @@ export class AppService {
     return this.httpClient.get<any>('http://localhost:8080/product');
   }
 
-  searchByProductNameAndExpireDateAndImportDate(productName: string, importDate: string, startDate: string, endDate: string): Observable<any> {
+  searchByProductNameAndExpireDateAndImportDate(productName: string, importDate: string, startDate: string, endDate: string, page: number, size: number): Observable<any> {
     if (productName == "" && importDate == "" && startDate == "" && endDate == "") {
-      return this.httpClient.get<any>('http://localhost:8080/package/');
+      return this.httpClient.get<any>('http://localhost:8080/package?page=' + page + '&size=' + size);
     } else {
-      return this.httpClient.get<any>('http://localhost:8080/package?productName=' + productName + '&importDate=' + importDate + '&startDate=' + startDate + '&endDate=' + endDate);
+      return this.httpClient.get<any>('http://localhost:8080/package?productName=' + productName + '&importDate=' + importDate + '&startDate=' + startDate + '&endDate=' + endDate + '&page=' + page + '&size=' + size);
     }
   }
 }
