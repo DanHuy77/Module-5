@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {DatePipe, formatDate} from '@angular/common';
-import {Local} from 'protractor/built/driverProviders';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContractService} from '../service/contract.service';
 import {Router} from '@angular/router';
+import {differenceInDays, differenceInYears} from 'date-fns';
 
 @Component({
   selector: 'app-contract-add',
@@ -11,13 +10,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./contract-add.component.css']
 })
 export class ContractAddComponent implements OnInit {
+
   addContractForm = new FormGroup({
     startDay: new FormControl(''),
     endDay: new FormControl(''),
     deposit: new FormControl(''),
     customer: new FormControl(''),
     facility: new FormControl('')
-  }, [Validators.required, this.endDayValidate]);
+  }, [this.validateRegisteredDate]);
 
   constructor(private contractService: ContractService, private router: Router) {
   }
@@ -25,15 +25,11 @@ export class ContractAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  endDayValidate(addContractForm: any): { invalidEndDay: boolean } | null {
-    const datePipe: DatePipe = new DatePipe('en-US');
-    const dateOfStart = datePipe.transform(addContractForm.controls.startDay.value, 'yyyy/MM/dd');
-    const dateOfEnd = datePipe.transform(addContractForm.controls.endDay.value, 'yyyy/MM/dd');
-    console.log(dateOfStart);
-    // if (dateOfStart < dateOfEnd) {
-    //   return {invalidEndDay: true};
-    // }
-    return null;
+  validateRegisteredDate(c: AbstractControl): { 'endDayAfterStartDay': boolean } | null {
+    const startDay = new Date(c.get('startDay')?.value);
+    const endDay = new Date(c.get('endDay')?.value);
+    const check = differenceInDays(endDay, startDay);
+    return (check < 0) ? {endDayAfterStartDay: true} : null;
   }
 
   get startDay() {

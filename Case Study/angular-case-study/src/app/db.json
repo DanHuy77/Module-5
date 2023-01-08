@@ -5,14 +5,29 @@
       "name": "Nguyễn Thị Hào",
       "birthday": "1970-11-07",
       "idCard": "643431213",
-      "phoneNumber": "0945423362",
+      "phoneNumber": "+84123",
       "gender": false,
       "email": "thihao07@gmail.com",
       "address": "23 Nguyễn Hoàng, Đà Nẵng",
       "customerType": {
-        "id": 5,
-        "name": "Member"
-      }
+        "id": 1,
+        "name": "Diamond"
+      },
+      "idNumber": "1234567891"
+    },
+    {
+      "name": "Đặng Nhật Huy 2",
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      },
+      "birthday": "1920-01-01",
+      "gender": true,
+      "idNumber": "1234567891",
+      "phoneNumber": "123",
+      "email": "b77cwalk@gmail.com",
+      "address": "a",
+      "id": 3
     }
   ],
   "facility": [
@@ -35,11 +50,87 @@
         "id": 3,
         "name": "date"
       }
+    },
+    {
+      "id": 2,
+      "name": null,
+      "area": null,
+      "cost": null,
+      "maxUser": null,
+      "roomStandard": null,
+      "otherDescription": null,
+      "poolArea": null,
+      "floorNumber": null,
+      "freeService": null,
+      "rentalType": null,
+      "facilityType": null
+    },
+    {
+      "id": 3,
+      "name": "a",
+      "area": "1",
+      "cost": "1",
+      "maxUser": 1,
+      "roomStandard": "Vip",
+      "otherDescription": "a",
+      "poolArea": "1",
+      "floorNumber": 1,
+      "freeService": "a",
+      "rentalType": {
+        "id": 1,
+        "name": "year"
+      },
+      "facilityType": {
+        "id": 1,
+        "name": "Villa"
+      }
     }
   ],
   "contract": [
     {
       "id": 1,
+      "startDay": "2020-12-08",
+      "endDay": "2020-12-08",
+      "deposit": 0,
+      "customer": {
+        "id": 1,
+        "name": "Nguyễn Thị Hào"
+      },
+      "facility": {
+        "id": 3,
+        "name": "Room Twin 01"
+      }
+    },
+    {
+      "id": 2,
+      "startDay": "2020-12-08",
+      "endDay": "2020-12-08",
+      "deposit": 0,
+      "customer": {
+        "id": 1,
+        "name": "Nguyễn Thị Hào"
+      },
+      "facility": {
+        "id": 3,
+        "name": "Room Twin 01"
+      }
+    },
+    {
+      "id": 3,
+      "startDay": "2020-12-08",
+      "endDay": "2020-12-08",
+      "deposit": 0,
+      "customer": {
+        "id": 1,
+        "name": "Nguyễn Thị Hào"
+      },
+      "facility": {
+        "id": 3,
+        "name": "Room Twin 01"
+      }
+    },
+    {
+      "id": 4,
       "startDay": "2020-12-08",
       "endDay": "2020-12-08",
       "deposit": 0,
@@ -63,14 +154,14 @@
       "name": "Nhân viên"
     }
   ],
-  "customerType":[
+  "customerType": [
     {
       "id": 1,
       "name": "Diamond"
     },
     {
       "id": 2,
-      "name": "Platinium"
+      "name": "Platinum"
     },
     {
       "id": 3,
@@ -87,19 +178,19 @@
   ],
   "rentalType": [
     {
-      "id"  : 1,
+      "id": 1,
       "name": "year"
     },
     {
-      "id"  : 2,
+      "id": 2,
       "name": "month"
     },
     {
-      "id"  : 3,
+      "id": 3,
       "name": "day"
     },
     {
-      "id"  : 4,
+      "id": 4,
       "name": "hour"
     }
   ],
@@ -117,5 +208,4 @@
       "name": "Room"
     }
   ]
-
 }

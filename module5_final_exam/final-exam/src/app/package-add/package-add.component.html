@@ -1,0 +1,84 @@
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hãy nhập thông tin lô hàng</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" routerLink="/list" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addPackageForm" (ngSubmit)="addNewPackage()" novalidate>
+          <!-- <input hidden type="text" th:field="*{id}"> -->
+          <div class="form-group">
+            <label>Mã lô hàng</label>
+            <input type="text" class="form-control" formControlName="packageCode">
+          </div>
+
+          <div>
+            <span style="color: red"
+                  *ngIf="addPackageForm.controls.packageCode.hasError('required')&&addPackageForm.controls.packageCode.dirty">Mã lô hàng không được để trống</span>
+            <span style="color: red"
+                  *ngIf="addPackageForm.controls.packageCode.hasError('pattern')">Mã lô hàng đang sai định dạng</span>
+            <br>
+          </div>
+
+          <div class="form-group">
+            <label>Sản phẩm</label>
+            <select formControlName="product" class="form-select">
+              <option>-- Chọn sản phẩm --</option>
+              <option *ngFor="let item of products" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+          <div>
+            <span style="color: red"
+                  *ngIf="addPackageForm.controls.product.dirty && addPackageForm.controls.product.hasError('required')">Hãy chọn sản phẩm</span>
+            <br>
+          </div>
+
+          <div class="form-group">
+            <label>Số lượng</label>
+            <input type="number" class="form-control" formControlName="quantity">
+          </div>
+          <div>
+            <span style="color: red"
+                  *ngIf="addPackageForm.controls.quantity.hasError('required')&&addPackageForm.controls.quantity.dirty">Số lượng không được để trống</span>
+            <span style="color: red"
+                  *ngIf="addPackageForm.controls.quantity.hasError('min')">Số lượng phải là số nguyên dương và lớn hơn 0</span>
+            <br>
+          </div>
+
+          <div class="form-group">
+            <label>Ngày nhập hàng</label>
+            <br>
+            <input type="date" class="form-control" formControlName="importDate">
+          </div>
+          <div>
+            <br>
+          </div>
+
+          <div class="form-group">
+            <label>Ngày sản xuất</label>
+            <br>
+            <input type="date" class="form-control" formControlName="producedDate">
+          </div>
+
+          <div>
+            <br>
+          </div>
+
+          <div class="form-group">
+            <label>Ngày hết hạn</label>
+            <input type="date" class="form-control" formControlName="expireDate">
+          </div>
+          <div>
+            <br>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" routerLink="/list">Hủy bỏ</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!addPackageForm.valid">Xác nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

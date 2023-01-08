@@ -14,12 +14,13 @@ export class CustomerEditComponent implements OnInit {
   customer?: Customer;
   customerType?: CustomerType[] = [];
   editCustomerForm = new FormGroup({
+    id: new FormControl(),
     name: new FormControl('', [Validators.minLength(5), Validators.maxLength(50), Validators.required]),
-    customerTypeForm: new FormControl('', [Validators.required]),
+    customerType: new FormControl('', [Validators.required]),
     birthday: new FormControl('', [Validators.required]),
     gender: new FormControl('', [Validators.required]),
     idNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^[+][8][4][0-9]{9,10}$')]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^[+][8][4][0-9]{3}$')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     address: new FormControl('', [Validators.required, Validators.maxLength(100)])
   });
@@ -44,43 +45,14 @@ export class CustomerEditComponent implements OnInit {
   }
 
   compareType(item1: CustomerType, item2: CustomerType): boolean {
-    return item1 && item2 ? item1.id === item2.id : item1 === item2;
-  }
-  get name() {
-    return this.editCustomerForm.get('name');
-  }
-
-  get customerTypeForm() {
-    return this.editCustomerForm.get('customerTypeForm');
-  }
-
-  get birthday() {
-    return this.editCustomerForm.get('birthday');
-  }
-
-  get gender() {
-    return this.editCustomerForm.get('gender');
-  }
-
-  get idNumber() {
-    return this.editCustomerForm.get('idNumber');
-  }
-
-  get phoneNumber() {
-    return this.editCustomerForm.get('phoneNumber');
-  }
-
-  get email() {
-    return this.editCustomerForm.get('email');
-  }
-
-  get address() {
-    return this.editCustomerForm.get('address');
+    return item1.id === item2.id;
   }
 
   editCustomer(): void {
     this.customerServiceService.editCustomer(this.editCustomerForm.value).subscribe(data => {
       this.router.navigateByUrl('/customer/list');
+      alert('Đã sửa thông tin khách hàng');
+      console.log(this.editCustomerForm.value);
     });
   }
 }

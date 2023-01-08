@@ -1,0 +1,95 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "Sting",
+      "origin": "Việt Nam",
+      "price": 5000,
+      "unit": "Chai"
+    },
+    {
+      "id": 2,
+      "name": "Tiger",
+      "price": 8000,
+      "origin": "Việt Nam",
+      "unit": "Thùng"
+    }
+  ],
+  "package": [
+    {
+      "id": 1,
+      "packageCode": "LH-0001",
+      "product": {
+        "id": 1,
+        "name": "Sting",
+        "origin": "Việt Nam",
+        "price": 5000,
+        "unit": "Chai"
+      },
+      "quantity": "5",
+      "importDate": "2020-01-01",
+      "producedDate": "2019-01-01",
+      "expireDate": "2022-01-01"
+    },
+    {
+      "id": 2,
+      "packageCode": "LH-0002",
+      "product": {
+        "id": 2,
+        "name": "Tiger",
+        "price": 8000,
+        "origin": "Việt Nam",
+        "unit": "Thùng"
+      },
+      "quantity": "5",
+      "importDate": "2020-01-01",
+      "producedDate": "2019-01-01",
+      "expireDate": "2022-01-01"
+    },
+    {
+      "packageCode": "LH-0003",
+      "product": {
+        "id": 1,
+        "name": "Sting",
+        "origin": "Việt Nam",
+        "price": 5000,
+        "unit": "Chai"
+      },
+      "quantity": "5",
+      "importDate": "2023-01-17",
+      "producedDate": "2023-01-11",
+      "expireDate": "2023-01-07",
+      "id": 3
+    },
+    {
+      "packageCode": "LH-0004",
+      "product": {
+        "id": 2,
+        "name": "Tiger",
+        "price": 8000,
+        "origin": "Việt Nam",
+        "unit": "Thùng"
+      },
+      "quantity": "5",
+      "importDate": "2023-01-18",
+      "producedDate": "2023-01-24",
+      "expireDate": "2023-01-13",
+      "id": 4
+    },
+    {
+      "packageCode": "LH-0005",
+      "product": {
+        "id": 1,
+        "name": "Sting",
+        "origin": "Việt Nam",
+        "price": 5000,
+        "unit": "Chai"
+      },
+      "quantity": "5",
+      "importDate": "2023-02-02",
+      "producedDate": "2023-02-03",
+      "expireDate": "2023-02-04",
+      "id": 5
+    }
+  ]
+}

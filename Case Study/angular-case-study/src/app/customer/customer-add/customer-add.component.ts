@@ -13,11 +13,11 @@ export class CustomerAddComponent implements OnInit {
   customerType?: CustomerType[] = [];
   addCustomerForm = new FormGroup({
     name: new FormControl('', [Validators.minLength(5), Validators.maxLength(50), Validators.required]),
-    customerTypeForm: new FormControl('', [Validators.required]),
+    customerType: new FormControl( '', [Validators.required]),
     birthday: new FormControl('', [Validators.required]),
     gender: new FormControl('', [Validators.required]),
     idNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^[+][8][4][0-9]{9,10}$')]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{3}$')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     address: new FormControl('', [Validators.required, Validators.maxLength(100)]),
   });
@@ -34,43 +34,13 @@ export class CustomerAddComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  get name() {
-    return this.addCustomerForm.get('name');
-  }
-
-  get customerTypeForm() {
-    return this.addCustomerForm.get('customerTypeForm');
-  }
-
-  get birthday() {
-    return this.addCustomerForm.get('birthday');
-  }
-
-  get gender() {
-    return this.addCustomerForm.get('gender');
-  }
-
-  get idNumber() {
-    return this.addCustomerForm.get('idNumber');
-  }
-
-  get phoneNumber() {
-    return this.addCustomerForm.get('phoneNumber');
-  }
-
-  get email() {
-    return this.addCustomerForm.get('email');
-  }
-
-  get address() {
-    return this.addCustomerForm.get('address');
-  }
-
   addNewCustomer(): void {
     this.addCustomerForm.value.id = Number(this.addCustomerForm.value.id);
-    this.customerServiceService.addCustomer(this.addCustomerForm.value).subscribe(data => {
-      this.router.navigateByUrl('customer/list');
-    });
+    if (this.addCustomerForm.valid) {
+      this.customerServiceService.addCustomer(this.addCustomerForm.value).subscribe(data => {
+        alert('Đã thêm thông tin khách hàng');
+        this.router.navigateByUrl('customer/list');
+      });
+    }
   }
 }

@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-6">
+
+    <div class="my-5"><h1>Cập nhật thông tin lô hàng</h1></div>
+    <form [formGroup]="editPackageForm" (ngSubmit)="editPackageInformation()" class="my-5" novalidate>
+       <input hidden type="text" formControlName="id">
+      <div class="form-group">
+        <label>Mã lô hàng</label>
+        <span style="color: red"
+              *ngIf="editPackageForm.controls.packageCode.hasError('required')&&editPackageForm.controls.packageCode.dirty"> không được để trống</span>
+        <span style="color: red" *ngIf="editPackageForm.controls.packageCode.hasError('pattern')"> đang sai định dạng</span>
+        <br>
+        <input type="text" class="form-control" formControlName="packageCode">
+      </div>
+
+      <div class="form-group">
+        <label>Sản phẩm</label>
+        <span style="color: red"
+              *ngIf="editPackageForm.controls.product.dirty && editPackageForm.controls.product.hasError('required')"> phải được chọn</span>
+        <select formControlName="product" class="form-select" [compareWith]="compareProduct">
+          <option>-- Chọn sản phẩm --</option>
+          <option *ngFor="let item of products" [ngValue]="item">{{item.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Số lượng</label>
+        <span style="color: red"
+              *ngIf="editPackageForm.controls.quantity.hasError('required')&&editPackageForm.controls.quantity.dirty"> không được để trống</span>
+        <span style="color: red"
+              *ngIf="editPackageForm.controls.quantity.hasError('min')"> phải là số nguyên dương và lớn hơn 0</span>
+        <br>
+        <input type="number" class="form-control" formControlName="quantity">
+      </div>
+
+      <div class="form-group">
+        <label>Ngày nhập hàng</label>
+        <br>
+        <input type="date" class="form-control" formControlName="importDate">
+      </div>
+
+      <div class="form-group">
+        <label>Ngày sản xuất</label>
+        <br>
+        <input type="date" class="form-control" formControlName="producedDate">
+      </div>
+
+      <div class="form-group">
+        <label>Ngày hết hạn</label>
+        <br>
+        <input type="date" class="form-control" formControlName="expireDate">
+      </div>
+      <div>
+        <br>
+        <button type="submit" class="btn btn-success">Xác nhận</button>
+        <button routerLink="/list" class="btn btn-secondary">Hủy</button>
+      </div>
+    </form>
+  </div>
+</div>

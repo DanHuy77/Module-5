@@ -6,7 +6,6 @@
       <!--            ----------Form nhập ngày làm hợp đồng------------>
       <div class="form-group">
         <label>Ngày bắt đầu</label>
-        <span style="color: red" *ngIf="addContractForm.hasError('required') && startDay?.dirty"> không được để trống</span>
         <br>
         <input type="date" class="form-control" formControlName="startDay" name="startDay" min="1920-01-01">
       </div>
@@ -14,7 +13,7 @@
       <!--            ----------Form nhập ngày kết thúc------------>
       <div class="form-group">
         <label>Ngày kết thúc</label><span style="color: red" *ngIf="addContractForm.hasError('required') && endDay?.dirty"> không được để trống</span>
-        <span style="color: red" *ngIf="addContractForm.hasError('invalidEndDay')">Ngày kết thúc phải lớn hơn ngày bắt đầu</span>
+        <span style="color: red" *ngIf="addContractForm.hasError('endDayAfterStartDay')"> phải lớn hơn ngày bắt đầu</span>
         <br>
         <input type="date" class="form-control" formControlName="endDay" name="endDay" min="1920-01-01">
       </div>

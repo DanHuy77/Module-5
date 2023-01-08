@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CustomerType} from '../CustomerType';
 import {Customer} from '../Customer';
 import {CustomerServiceService} from '../service/customer-service.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-customer-list',
@@ -9,6 +10,7 @@ import {CustomerServiceService} from '../service/customer-service.service';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+  p = 1;
   removeId?: number;
   removeName?: string;
   customerTypes: CustomerType[] = [];
@@ -20,21 +22,31 @@ export class CustomerListComponent implements OnInit {
   ngOnInit(): void {
     this.customerServiceService.getAllCustomer().subscribe(data => {
       console.log(data);
-      // @ts-ignore
-      this.customers = data;
+      this.customers = data.content;
+      console.log(this.customers);
     }, error => {
     }, () => {
     });
+    this.customerServiceService.getAllCustomerType().subscribe(data => {
+      this.customerTypes = data;
+    });
   }
 
-  passRemoveInfo(id: number, name: string): void {
-    this.removeId = id;
+  passRemoveInfo(id: string, name: string): void {
+    this.removeId = Number(id);
     this.removeName = name;
   }
 
-  remove(id: string): void {
-    this.customerServiceService.removeCustomer(Number(id)).subscribe(data => {
+  remove(): void {
+    this.customerServiceService.removeCustomer(Number(this.removeId)).subscribe(data => {
+      alert('Đã xóa khách hàng');
       this.ngOnInit();
+    });
+  }
+
+  search(name: string, email: string, customerType: string): void {
+    this.customerServiceService.searchByNameAndEmail(name, email, customerType).subscribe(data => {
+      this.customers = data;
     });
   }
 }

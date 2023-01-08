@@ -1,0 +1,86 @@
+<h1 style="text-align: center">Danh sách lô hàng</h1>
+
+<nav style="margin-left:900px" class="navbar">
+  <pre
+    style="margin-left:30px; margin-bottom: -2px">Tên sản phẩm     Ngày nhập hàng  từ Ngày sản xuất  đến Ngày hết hạn</pre>
+  <div class="container-fluid">
+    <form class="d-flex" role="search">
+      <input #productName class="form-control me-2" type="search" placeholder="Tìm kiếm ..."
+             aria-label="Search" formControlName="name">
+
+      <input #importDate class="form-control me-2" type="date"
+             aria-label="Search">
+
+      <input #producedDate class="form-control me-2" type="date"
+             aria-label="Search">
+
+      <input #expireDate class="form-control me-2" type="date"
+             aria-label="Search">
+      <button class="btn btn-outline-success" type="button"
+              (click)="search(productName.value, importDate.value, producedDate.value, expireDate.value)"><img
+        width="25px" height="25px"
+        src="https://static.thenounproject.com/png/1063942-200.png">
+      </button>
+    </form>
+  </div>
+</nav>
+<table class="table table-success">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Mã lô hàng</th>
+    <th scope="col">Tên sản phẩm</th>
+    <th scope="col">Giá tiền</th>
+    <th scope="col">Đơn vị</th>
+    <th scope="col">Số lượng</th>
+    <th scope="col">Ngày nhập hàng</th>
+    <th scope="col">Ngày sản xuất</th>
+    <th scope="col">Ngày hết hạn</th>
+    <th scope="col" colspan="3">
+      <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add" routerLink="/add">Nhập hàng</a>
+    </th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pack of packs| paginate: { itemsPerPage: 5, currentPage: p}; index as i ">
+    <td>{{i + 1}}</td>
+    <input hidden #imports [value]="pack?.importDate">
+    <input hidden #name [value]="pack?.product?.name">
+    <input hidden #id [value]="pack?.id">
+    <td>{{pack?.packageCode}}</td>
+    <td>{{pack.product?.name}}</td>
+    <td>{{pack.product?.price}}</td>
+    <td>{{pack.product?.unit}}</td>
+    <td>{{pack?.quantity}}</td>
+    <td>{{pack?.importDate}}</td>
+    <td>{{pack?.producedDate}}</td>
+    <td>{{pack?.expireDate}}</td>
+    <td><a class="btn btn-success" [routerLink]="['/edit', pack.id]">Sửa</a></td>
+    <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#remove"
+           (click)="passRemoveInfo(imports.value, name.value, id.value)">Xóa</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>
+
+<div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Chú ý!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa lô hàng "<span>{{removeName}}</span>" nhập ngày "<span>{{removeImportDate}}</span>" ?
+        <!--        <input #id hidden value="{{removeId}}">-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+        <button type="button" class="btn btn-primary" (click)="remove()" data-bs-dismiss="modal">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>

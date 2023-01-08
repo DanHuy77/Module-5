@@ -1,22 +1,27 @@
-<h1 style="text-align: center">Danh sách Khách hàng</h1>
+<h1 style="text-align: center" xmlns:paginate="http://www.w3.org/1999/xhtml"
+    xmlns:paginate="http://www.w3.org/1999/xhtml" xmlns:paginate="http://www.w3.org/1999/xhtml"
+    xmlns:pagination-template="http://www.w3.org/1999/xhtml" xmlns:pagination-template="http://www.w3.org/1999/xhtml">
+  Danh sách Khách hàng</h1>
 <!--<th:block th:if="${message}">-->
 <!--  <h4 style="text-align: center" th:text="${message}"></h4>-->
 <!--</th:block>-->
 
 <nav style="float: right" class="navbar">
   <div class="container-fluid">
-    <form class="d-flex" role="search" method="post">
-      <input name="key1" class="form-control me-2" type="search" placeholder="Search by Name"
-             aria-label="Search">
-      <input name="key2" class="form-control me-2" type="search" placeholder="And Email"
-             aria-label="Search">
-      <select style="text-align: center" class="form-select hideDefaultSelect" name="key3">
-        <option class="defaultSelect" value="">- Loại khách -</option>
-        <option>
+    <form class="d-flex" role="search">
+      <input #name class="form-control me-2" type="search" placeholder="Search by Name"
+             aria-label="Search" formControlName="name">
+      <input #email class="form-control me-2" type="search" placeholder="And Email"
+             aria-label="Search" formControlName="email">
+      <select #customerType style="text-align: center" class="form-select">
+        <option value="">-- Chọn loại khách --</option>
+        <option *ngFor="let item of customerTypes" [value]="item.name">
+          {{item.name}}
         </option>
       </select>
-      <button class="btn btn-outline-success" type="submit"><img width="25px" height="25px"
-                                                                 src="https://static.thenounproject.com/png/1063942-200.png">
+      <button class="btn btn-outline-success" type="button"
+              (click)="search(name.value, email.value, customerType.value)"><img width="25px" height="25px"
+                                                                                 src="https://static.thenounproject.com/png/1063942-200.png">
       </button>
     </form>
   </div>
@@ -41,8 +46,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of customers">
-    <td>{{item.id}}</td>
+  <tr *ngFor="let item of customers | paginate: { itemsPerPage: 5, currentPage: p}; index as i ">
+    <td>{{i + 1}}</td>
+    <input hidden #id [value]="item.id">
+    <input hidden #name [value]="item.name">
     <td>{{item.name}}</td>
     <td>{{item.birthday}}</td>
     <td>
@@ -53,13 +60,14 @@
     <td>{{item.email}}</td>
     <td>{{item.address}}</td>
     <td>{{item.customerType?.name}}</td>
-    <td><a class="btn btn-success"[routerLink]="['/customer/edit', item.id]">Cập nhật</a></td>
+    <td><a class="btn btn-success" [routerLink]="['/customer/edit', item.id]">Cập nhật</a></td>
     <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#remove"
-           (click)="passRemoveInfo(item.id, item.name)">Xóa</a>
+           (click)="passRemoveInfo(id.value, name.value)">Xóa</a>
     </td>
   </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>
 
 <div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -70,12 +78,12 @@
       </div>
       <div class="modal-body">
         Bạn có muốn xóa khách hàng "<span>{{removeName}}</span>" ?
-        <input #id hidden value="{{removeId}}">
+        <!--        <input #id hidden value="{{removeId}}">-->
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
-        <button type="button" class="btn btn-primary" (click)="remove(id.value)">Xác nhận</button>
+        <button type="button" class="btn btn-primary" (click)="remove()" data-bs-dismiss="modal">Xác nhận</button>
       </div>
     </div>
   </div>

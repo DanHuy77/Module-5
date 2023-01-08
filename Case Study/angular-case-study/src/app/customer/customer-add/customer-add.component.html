@@ -7,7 +7,7 @@
       <!--            ----------Form nhập tên------------>
       <div class="form-group">
         <label>Họ tên</label>
-        <span style="color: red" *ngIf="addCustomerForm.controls.name.hasError('required')&&name?.dirty"> không được để trống</span>
+        <span style="color: red" *ngIf="addCustomerForm.controls.name.hasError('required')&&addCustomerForm.controls.name.dirty"> không được để trống</span>
         <span style="color: red" *ngIf="addCustomerForm.controls.name.hasError('maxlength')"> không được có độ dài vượt quá 50 ký tự</span>
         <span style="color: red" *ngIf="addCustomerForm.controls.name.hasError('minlength')"> không được có độ dài nhỏ hơn 5 ký tự</span>
         <br>
@@ -17,9 +17,9 @@
       <div class="form-group">
         <label>Loại khách</label>
         <span style="color: red"
-              *ngIf="customerTypeForm?.dirty && addCustomerForm.controls.customerType.hasError('required')"> phải được chọn</span>
-        <select class="form-select hideDefaultSelect" formControlName="customerTypeForm">
-          <option class="defaultSelect">Chọn loại khách</option>
+              *ngIf="addCustomerForm.controls.customerType.dirty && addCustomerForm.controls.customerType.hasError('required')"> phải được chọn</span>
+        <select formControlName="customerType" class="form-select">
+          <option>-- Chọn loại khách --</option>
           <option *ngFor="let item of customerType" [ngValue]="item">{{item.name}}</option>
         </select>
       </div>
@@ -33,18 +33,18 @@
       <!--            ----------Form chọn giới tính------------>
       <div class="form-group">
         <label>Gender</label>
-        <span style="color: red" *ngIf="addCustomerForm.controls.gender.hasError('required')&& gender?.dirty"> phải được chọn</span>
+        <span style="color: red" *ngIf="addCustomerForm.controls.gender.hasError('required')&& addCustomerForm.controls.gender.dirty"> phải được chọn</span>
         <br>
         <select class="form-select hideDefaultSelect" formControlName="gender">
           <option class="defaultSelect">Chọn giới tính</option>
-          <option>Nam</option>
-          <option>Nữ</option>
+          <option [ngValue]="true">Nam</option>
+          <option [ngValue]="false">Nữ</option>
         </select>
       </div>
       <!--            ----------Form nhập CCCD------------>
       <div class="form-group">
         <label>Số CMND</label>
-        <span style="color: red" *ngIf="idNumber?.dirty && addCustomerForm.controls.idNumber.hasError('required')"> không được để trống</span>
+        <span style="color: red" *ngIf="addCustomerForm.controls.idNumber.dirty && addCustomerForm.controls.idNumber.hasError('required')"> không được để trống</span>
         <span style="color: red"
               *ngIf="addCustomerForm.controls.idNumber.hasError('pattern')"> phải có 10 ký tự số</span>
         <br>
@@ -55,7 +55,7 @@
       <div class="form-group">
         <label>Số điện thoại</label>
         <span style="color: red"
-              *ngIf="phoneNumber?.dirty && addCustomerForm.controls.phoneNumber.hasError('required')"> không được để trống</span>
+              *ngIf="addCustomerForm.controls.phoneNumber?.dirty && addCustomerForm.controls.phoneNumber.hasError('required')"> không được để trống</span>
         <span style="color: red"
               *ngIf="addCustomerForm.controls.phoneNumber.hasError('pattern')"> đang sai định dạng</span>
         <br>
@@ -66,7 +66,7 @@
       <!--            ----------Form nhập email------------>
       <div class="form-group">
         <label>Email</label>
-        <span style="color: red" *ngIf="email?.dirty && addCustomerForm.controls.email.hasError('required')"> không được để trống</span>
+        <span style="color: red" *ngIf="addCustomerForm.controls.email.dirty && addCustomerForm.controls.email.hasError('required')"> không được để trống</span>
         <span style="color: red"
               *ngIf="addCustomerForm.controls.email.hasError('email')"> đang sai định dạng</span>
         <br>
@@ -76,7 +76,7 @@
       <!--            ----------Form nhập địa chỉ------------>
       <div class="form-group">
         <label>Địa chỉ</label>
-        <span style="color: red" *ngIf="address?.dirty && addCustomerForm.controls.address.hasError('required')"> không được để trống</span>
+        <span style="color: red" *ngIf="addCustomerForm.controls.address.dirty && addCustomerForm.controls.address.hasError('required')"> không được để trống</span>
         <span style="color: red" *ngIf="addCustomerForm.controls.address.hasError('maxlength')"> không được dài hơn 100 ký tự</span>
         <br>
         <input type="text" class="form-control" formControlName="address">
@@ -86,7 +86,7 @@
       <div class="form-group d-flex align-items-center justify-content-center" style="margin-top: 25px">
 
         <a class="form-control btn btn-outline-secondary"
-           style="text-decoration: none; color: black; width: 30%">Hủy</a>
+           style="text-decoration: none; color: black; width: 30%" routerLink="/customer/list">Hủy</a>
 
         <input style="width: 30%" type="submit" class="form-control btn btn-outline-success mx-5"
                value="Xác nhận">
