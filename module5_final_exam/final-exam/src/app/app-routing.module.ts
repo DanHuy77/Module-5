@@ -10,7 +10,7 @@ const routes: Routes = [{
 },
   {path: 'add', component: PackageAddComponent},
   {path: 'edit/:id', component: PackageEditComponent},
-  {path: 'index', component: BackgroundComponent}];
+  {path: '', component: BackgroundComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

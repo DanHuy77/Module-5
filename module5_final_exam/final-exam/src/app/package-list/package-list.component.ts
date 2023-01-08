@@ -18,26 +18,33 @@ export class PackageListComponent implements OnInit {
   page = 0;
   size = 5;
   totalPage = 0;
+  totalElement = 0;
+  productName = '';
+  importDate = '';
+  startDate = '';
+  endDate = '';
+
 
   constructor(private appService: AppService) {
 
   }
 
   ngOnInit(): void {
-    this.getAllPackage();
+    this.search(this.productName, this.importDate, this.startDate, this.endDate);
     this.appService.getAllProduct().subscribe(data => {
       this.product = data;
     });
   }
 
-  getAllPackage(): void {
-    this.appService.searchByProductNameAndExpireDateAndImportDate("", "", "", "", this.page, this.size).subscribe(data => {
-      this.packs = data.content;
-      this.totalPage = data.totalPages;
-      console.log(this.totalPage);
-      console.log(data)
-    });
-  }
+  // getAllPackage(): void {
+  //   this.appService.searchByProductNameAndExpireDateAndImportDate("", "", "", "", this.page, this.size).subscribe(data => {
+  //     this.packs = data.content;
+  //     this.totalPage = data.totalPages;
+  //     this.totalElement = data.totalElements;
+  //     console.log(this.totalPage);
+  //     console.log(data)
+  //   });
+  // }
 
   passRemoveInfo(importDate: string, name: string, id: string): void {
     this.removeImportDate = importDate;
@@ -47,14 +54,21 @@ export class PackageListComponent implements OnInit {
 
   remove() {
     this.appService.removePackage(Number(this.removeId)).subscribe(data => {
-      this.getAllPackage();
+      this.ngOnInit();
       alert("Đã xóa lô hàng")
     });
   }
 
   search(productName: string, importDate: string, producedDate: string, expireDate: string) {
-    this.appService.searchByProductNameAndExpireDateAndImportDate(productName, importDate, producedDate, expireDate, this.page, this.size).subscribe(data => {
+    this.productName = productName;
+    this.importDate = importDate;
+    this.startDate = producedDate;
+    this.endDate = expireDate;
+    this.appService.searchByProductNameAndExpireDateAndImportDate(this.productName, this.importDate, this.startDate, this.endDate, this.page, this.size).subscribe(data => {
       this.packs = data.content;
+      this.totalElement = data.totalElements;
+      this.totalPage = data.totalPages;
+      console.log(data);
     });
   }
 

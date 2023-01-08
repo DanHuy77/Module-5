@@ -40,7 +40,7 @@ public class PackageRestController {
             @RequestParam() int size) {
         Pageable pageable = Pageable.ofSize(size);
         Page<Package> packagePage = packageService.getPackageListByAll(productName, importDate, startDate, endDate, pageable.withPage(page));
-        packagePage.getTotalPages();
+        packagePage.hasNext();
         if (packagePage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

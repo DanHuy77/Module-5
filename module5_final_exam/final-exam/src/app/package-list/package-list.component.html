@@ -37,7 +37,7 @@
     <th scope="col">Ngày sản xuất</th>
     <th scope="col">Ngày hết hạn</th>
     <th scope="col" colspan="3">
-      <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add" routerLink="/index">Nhập hàng</a>
+      <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add" routerLink="/">Nhập hàng</a>
     </th>
 
   </tr>
@@ -65,8 +65,8 @@
 </table>
 <div style="text-align: right">
   <a class="btn btn-primary" *ngIf="page > 0" (click)="previousPage()">Trang trước</a>
-  <span> {{page+1}}/{{totalPage}} </span>
-  <a class="btn btn-primary" *ngIf="page+1 < totalPage" (click)="nextPage()">Trang
+  <span *ngIf="totalElement > 5"> {{page + 1}}/{{totalPage}} </span>
+  <a class="btn btn-primary" *ngIf="totalElement > 5" (click)="nextPage()">Trang
     sau</a>
 </div>
 
